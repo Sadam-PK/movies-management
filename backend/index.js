@@ -20,11 +20,6 @@ app.use(
     credentials: true, // for cookies
   })
 );
-
-app.get("/", (req, res) => {
-  res.send("Helloo");
-});
-
 app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
