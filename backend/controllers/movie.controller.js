@@ -18,10 +18,10 @@ export const movies = async (req, res) => {
 
     const movies = response.data.results;
     const totalMovies = movies.length;
-    const paginatedMovies = movies.slice((page - 1) * limit, page * limit); 
+    const skip = movies.slice((page - 1) * limit, page * limit); 
 
     return res.status(200).json({
-      movies: paginatedMovies,
+      movies: skip,
       totalMovies,
       currentPage: page,
       totalPages: Math.ceil(totalMovies / limit),
