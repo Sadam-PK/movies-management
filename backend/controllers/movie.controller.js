@@ -49,6 +49,13 @@ export const addFavorites = async (req, res) => {
   }
 };
 
-export const getFavorites = async (req, res) => {};
+export const getFavorites = async (req, res) => {
+  try {
+    const favoriteMovies = await Favorite.find({});
+    return res.status(200).json({ status: true, favoriteMovies });
+  } catch (error) {
+    return res.status(400).json({ status: false, message: error.message });
+  }
+};
 
 export const removeFavorite = async (req, res) => {};
