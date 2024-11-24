@@ -12,14 +12,43 @@ export const movies = async (req, res) => {
     const response = await axios.get(
       "https://itunes.apple.com/search?term=star&country=au&media=movie"
     );
-    return res.status(200).json(response.data);
+
+    return res.status(200).json(response.data.results);
+  } catch (error) {
+    return res.status(400).json({ status: false, message: error.message });
+  }
+};
+
+export const addFavorites = async (req, res) => {
+  const userId = req.user._id;
+  const { trackId } = req.body;
+
+  try {
+    if (!userId) {
+      return res
+        .status(400)
+        .json({ error: "userId is required to add to favorites" });
+    }
+
+    if (!trackId) {
+      return res
+        .status(400)
+        .json({ error: "trackId is required to add to favorites" });
+    }
+
+    const favorite = await new Favorite({
+      userId: userId,
+      movieId: trackId,
+    });
+
+    favorite.save();
+
+    return res.status(200).json({ status: true, message: "Added to favorite" });
   } catch (error) {
     return res.status(400).json({ status: false, message: error.message });
   }
 };
 
 export const getFavorites = async (req, res) => {};
-
-export const addFavorites = async (req, res) => {};
 
 export const removeFavorite = async (req, res) => {};
