@@ -68,3 +68,20 @@ export const login = async (req, res) => {
     return res.status(400).json({ status: false, message: error.message });
   }
 };
+
+export const me = async (req, res) => {
+  try {
+    const { email } = req.user;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ status: false, message: "User not found" });
+    }
+
+    user.password = undefined; // password not needed and shouldnt be sent
+
+    return res.send({ user });
+  } catch (error) {
+    return res.status(400).json({ status: false, message: error.message });
+  }
+};
