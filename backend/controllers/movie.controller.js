@@ -2,18 +2,30 @@ import axios from "axios";
 import { Favorite } from "../models/movie.model.js";
 // import bcrypt from "bcryptjs";
 // import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
+import dotenv from "dotenv"; 
 dotenv.config();
 const SECRET = process.env.SECRET;
 
 export const movies = async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const term = req.query.term || "star";
+
     const response = await axios.get(
-      "https://itunes.apple.com/search?term=star&country=au&media=movie"
+      `https://itunes.apple.com/search?term=${term}&country=au&media=movie`
     );
 
-    return res.status(200).json(response.data.results);
+    const movies = response.data.results;
+    const totalMovies = movies.length;
+    const paginatedMovies = movies.slice((page - 1) * limit, page * limit); 
+
+    return res.status(200).json({
+      movies: paginatedMovies,
+      totalMovies,
+      currentPage: page,
+      totalPages: Math.ceil(totalMovies / limit),
+    });
   } catch (error) {
     return res.status(400).json({ status: false, message: error.message });
   }
