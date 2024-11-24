@@ -1,10 +1,10 @@
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 import cookiesParser from "cookie-parser";
 import authRoutes from "./routes/auth.route.js";
+import moviesRoutes from './routes/movie.route.js';
 import { databaseConnection } from "./db/dbConnection.js";
 
 const PORT = process.env.PORT || 3000;
@@ -21,6 +21,7 @@ app.use(
   })
 );
 app.use("/api/auth", authRoutes);
+app.use("/api/movies", moviesRoutes)
 
 app.listen(PORT, () => {
   databaseConnection(); // database connection
