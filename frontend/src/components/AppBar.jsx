@@ -10,20 +10,20 @@ const Appbar = () => {
   // conditional render """"" appbar """"" whether or not the user is present
   if (!user) {
     return (
-      <div className="bg-blue-400 p-3 flex justify-between items-center relative">
-        <div className="space-x-2">
+      <div className="bg-white p-3 flex justify-between items-center relative">
+        <div className="space-x-2 ml-20">
           <FontAwesomeIcon icon={faTv} className="text-2xl" />
           <Link to="/" className="font-bold">
-            Event Management
+            Movie Management
           </Link>
         </div>
 
         <div>
           <ul className="flex flex-row gap-5">
-            <li>
+            <li className="hover:text-indigo-900">
               <Link to="/login">Login</Link>
             </li>
-            <li>
+            <li className="hover:text-indigo-900">
               <Link to="/signup">Signup</Link>
             </li>
           </ul>
@@ -33,11 +33,11 @@ const Appbar = () => {
   }
   return (
     <div>
-      <div className="bg-blue-400 p-3 flex justify-between items-center relative">
-        <div className="space-x-2">
-          <FontAwesomeIcon icon={faTv} className="text-xl" />
+      <div className="p-3 flex justify-between items-center">
+        <div className="space-x-2 ml-20">
+          <FontAwesomeIcon icon={faTv} className="text-2xl" />
           <Link to="/" className="font-bold">
-            Event Management
+            Movie Management
           </Link>
         </div>
 
@@ -45,8 +45,8 @@ const Appbar = () => {
           <ul className="flex flex-row gap-5">
             <li>{user}</li>
             <li
-              className="cursor-pointer w-[6vw] text-center bg-blue-600 text-white 
-            rounded-full hover:bg-blue-500 hover:transition duration-500"
+              className="cursor-pointer w-[6vw] text-center bg-indigo-900 text-white 
+            rounded-full hover:bg-indigo-700 hover:transition duration-500"
             >
               Logout
             </li>
