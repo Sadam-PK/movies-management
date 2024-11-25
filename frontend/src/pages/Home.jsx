@@ -1,5 +1,7 @@
 import React from "react";
 import MovieCard from "../components/MovieCard";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Home = () => {
   const movie = [
@@ -32,6 +34,8 @@ const Home = () => {
         "https://compote.slate.com/images/73f0857e-2a1a-4fea-b97a-bd4c241c01f5.jpg",
     },
   ];
+  const totalPages = 3;
+  const currentPage = 1;
   return (
     <div>
       <div className="bg-zinc-300">
@@ -49,20 +53,41 @@ const Home = () => {
           );
         })}
       </div>
-      <div className="h-[32vh] bg-zinc-300 flex flex-col items-center justify-center py-10">
-        <span>
-          <ul className="flex flex-row gap-10">
-            <li className="hover:text-indigo-900 cursor-pointer">
-              Android App
-            </li>
-            <li className="hover:text-indigo-900 cursor-pointer">
-              Terms of service
-            </li>
-            <li className="hover:text-indigo-900 cursor-pointer">Contact</li>
-            <li className="hover:text-indigo-900 cursor-pointer">Sitemap</li>
-            <li className="hover:text-indigo-900 cursor-pointer">Contact</li>
-          </ul>
-        </span>
+      {/* Pagination controls */}
+      {movie.length > 0 && (
+        <div className="flex bg-zinc-300 justify-center items-center gap-5 pt-20">
+          <button
+            // onClick={handlePrevPage}
+            disabled={currentPage === 1}
+            className="border border-gray-500 px-3 rounded-xl cursor-pointer hover:border-gray-400"
+          >
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </button>
+          <span className="">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            // onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className="border border-gray-500 px-3 rounded-xl cursor-pointer hover:border-gray-400"
+          >
+            <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+        </div>
+      )}
+
+      {/* ----- Footer ----- */}
+      <div className="h-[32vh] bg-zinc-300 flex flex-col items-center justify-center">
+        <ul className="flex flex-row gap-10">
+          <li className="hover:text-indigo-900 cursor-pointer">Android App</li>
+          <li className="hover:text-indigo-900 cursor-pointer">
+            Terms of service
+          </li>
+          <li className="hover:text-indigo-900 cursor-pointer">Contact</li>
+          <li className="hover:text-indigo-900 cursor-pointer">Sitemap</li>
+          <li className="hover:text-indigo-900 cursor-pointer">Contact</li>
+        </ul>
+
         <span className="w-[60vw] py-4 text-sm text-center">
           <p>
             Movie Management offers free online movie streaming, allowing you to
