@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTv } from "@fortawesome/free-solid-svg-icons";
 
 const Appbar = () => {
-  const user = "sadam@gmail.com";
-  // const user = false;
+  // const user = "sadam@gmail.com";
+  const user = false;
 
   // conditional render """"" appbar """"" whether or not the user is present
   if (!user) {
