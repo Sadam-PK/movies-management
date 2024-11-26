@@ -6,22 +6,47 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../components/CustomButton";
+import axios from "axios";
 
 export default function Login() {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
 
   const navigate = useNavigate();
 
-  const handleNameChange = (event) => setName(event.target.value);
-  const handleUsernameChange = (event) => setUsername(event.target.value);
+  const handleEmailChange = (event) => setEmail(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
-  const handleRadioChange = (event) => setRole(event.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      toast.error("All fields are required!");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://192.168.100.35:3000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+      toast.success(response.data.message || "login successful..");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      // Handle specific error response
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
+    }
   };
 
   return (
@@ -41,8 +66,8 @@ export default function Login() {
             <FontAwesomeIcon icon={faUser} className="text-gray-700 mr-3" />
           }
           placeholder="Email"
-          value={username}
-          onChange={handleUsernameChange}
+          value={email}
+          onChange={handleEmailChange}
         />
         <CustomInput
           icon={
