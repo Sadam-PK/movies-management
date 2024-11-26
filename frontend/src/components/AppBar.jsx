@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTv } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const Appbar = () => {
   // const user = "sadam@gmail.com";
-  const user = false;
+  // const user = false;
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/auth/me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setUser(response.data.user);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   // conditional render """"" appbar """"" whether or not the user is present
   if (!user) {
@@ -43,7 +62,7 @@ const Appbar = () => {
 
         <div>
           <ul className="flex flex-row gap-5">
-            <li>{user}</li>
+            <li>{user.email}</li>
             <li
               className="cursor-pointer w-[6vw] text-center bg-indigo-900 text-white 
             rounded-full hover:bg-indigo-700 hover:transition duration-500"

@@ -32,11 +32,19 @@ export default function Login() {
           password,
         }
       );
-      toast.success(response.data.message || "login successful..");
-      navigate("/");
+      const { token, message } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        toast.success(message || "Login successful!");
+        navigate("/");
+        window.location.reload();
+      } else {
+        toast.error("Token not received. Please try again.");
+      }
     } catch (error) {
       console.error(error);
-      // Handle specific error response
+
       if (
         error.response &&
         error.response.data &&

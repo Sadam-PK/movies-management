@@ -55,9 +55,13 @@ export const login = async (req, res) => {
     }
     if (user && isPasswordValid) {
       // ####### token ##### jwt #####
-      const token = jwt.sign({ _id:user._id, name: user.name, email: user.email }, SECRET, {
-        expiresIn: "1hr",
-      });
+      const token = jwt.sign(
+        { _id: user._id, name: user.name, email: user.email },
+        SECRET,
+        {
+          expiresIn: "1hr",
+        }
+      );
       res
         .status(200)
         .json({ status: true, message: "Logged in successfully", token });
@@ -72,16 +76,23 @@ export const login = async (req, res) => {
 export const me = async (req, res) => {
   try {
     const { email } = req.user;
+
+    if (!email) {
+      return res.status(404).json({ status: false, message: "User not found" });
+    }
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ status: false, message: "User not found" });
+      return res.status(404).json({ status: false, message: "User not found" });
     }
 
-    user.password = undefined; // password not needed and shouldnt be sent
+    //  user.password = undefined; // password not needed and shouldnt be sent
 
-    return res.send({ user });
+    return res.status(200).json({
+      status: true,
+      user: { email: user.email, name: user.name },
+    });
   } catch (error) {
-    return res.status(400).json({ status: false, message: error.message });
+    return res.status(500).json({ status: false, message: error.message });
   }
 };

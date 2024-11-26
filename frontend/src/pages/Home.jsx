@@ -43,9 +43,10 @@ const Home = () => {
         <h2 className=" pl-20 py-10 font-bold text-2xl">Popular Movies</h2>
       </div>
       <div className="flex flex-wrap justify-center bg-zinc-300">
-        {movie.map((e) => {
+        {movie.map((e, i) => {
           return (
             <MovieCard
+              key={i}
               name={e.name}
               desc={e.desc}
               rating={e.rating}
