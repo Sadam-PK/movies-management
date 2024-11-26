@@ -15,7 +15,7 @@ export default function Login() {
 
   // ------ context api -----
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ export default function Login() {
         // window.location.reload();
       } else {
         toast.error("Token not received. Please try again.");
-        navigate("/login")
+        navigate("/login");
       }
     } catch (error) {
       console.error(error);
@@ -66,6 +66,12 @@ export default function Login() {
       }
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div

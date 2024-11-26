@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
-const MovieCard = ({ name, desc, rating, photo }) => {
+const MovieCard = ({ name, genre, price, photo }) => {
   return (
     <div
       className="flex flex-col justify-center items-center bg-white 
@@ -13,13 +13,12 @@ const MovieCard = ({ name, desc, rating, photo }) => {
       </div>
       <div className="flex flex-col bg-white h-[14vh] w-[90%] py-2">
         <span>{name}</span>
-        <span>{desc}</span>
-        <span>{rating}</span>
+        <span>{genre}</span>
+        <span>{price}</span>
       </div>
       <div className="flex flex-col bg-white h-[10vh] w-full justify-center items-center">
         <button className="bg-indigo-900 rounded-lg p-2 w-[90%] text-white">
-          {" "}
-          <FontAwesomeIcon icon={faPlay} /> Watch
+          VIEW
         </button>
       </div>
     </div>

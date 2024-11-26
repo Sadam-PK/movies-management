@@ -1,10 +1,11 @@
-import React, { useContext , useEffect} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "../components/Footer";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
   const movie = [
@@ -37,6 +38,22 @@ const Home = () => {
         "https://compote.slate.com/images/73f0857e-2a1a-4fea-b97a-bd4c241c01f5.jpg",
     },
   ];
+
+  const [myMovies, setMyMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/movies");
+        setMyMovies(response?.data.movies);
+        console.log("===== my movies ==== ", myMovies);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const totalPages = 3;
   const currentPage = 1;
 
@@ -51,7 +68,7 @@ const Home = () => {
   }, [user, navigate]);
 
   if (!user) {
-    navigate("/login")
+    navigate("/login");
     return null;
   }
 
@@ -61,20 +78,20 @@ const Home = () => {
         <h2 className=" pl-20 py-10 font-bold text-2xl">Popular Movies</h2>
       </div>
       <div className="flex flex-wrap justify-center bg-zinc-300">
-        {movie.map((e, i) => {
+        {myMovies?.map((e, i) => {
           return (
             <MovieCard
               key={i}
-              name={e.name}
-              desc={e.desc}
-              rating={e.rating}
-              photo={e.photo}
+              name={e.trackName}
+              genre={e.primaryGenreName}
+              price={e.trackPrice}
+              photo={e.artworkUrl100}
             />
           );
         })}
       </div>
       {/* Pagination controls */}
-      {movie.length > 0 && (
+      {myMovies?.length > 0 && (
         <div className="flex bg-zinc-300 justify-center items-center gap-5 pt-20">
           <button
             // onClick={handlePrevPage}
