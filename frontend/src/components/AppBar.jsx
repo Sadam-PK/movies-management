@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTv } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import UserContext from "../context/UserContext";
 
 const Appbar = () => {
   // const user = "sadam@gmail.com";
   // const user = false;
 
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -19,6 +21,7 @@ const Appbar = () => {
           },
         });
         setUser(response.data.user);
+        // window.location.reload();
       } catch (error) {
         console.error("Error fetching user data:", error);
       }

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext , useEffect} from "react";
 import MovieCard from "../components/MovieCard";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "../components/Footer";
+import UserContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const movie = [
@@ -37,6 +39,22 @@ const Home = () => {
   ];
   const totalPages = 3;
   const currentPage = 1;
+
+  const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
+  if (!user) {
+    navigate("/login")
+    return null;
+  }
+
   return (
     <div>
       <div className="bg-zinc-300">

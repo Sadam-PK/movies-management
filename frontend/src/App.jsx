@@ -14,8 +14,8 @@ function App() {
       <AppBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/favorites" element={<Favorites />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/movie-details" element={<MovieDetails />} />
       </Routes>

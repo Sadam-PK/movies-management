@@ -1,16 +1,21 @@
 import CustomInput from "../components/CustomInput";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../components/CustomButton";
 import axios from "axios";
+import UserContext from "../context/UserContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // ------ context api -----
+
+  const { setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -19,6 +24,10 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setUser({
+      email,
+      password,
+    });
     if (!email || !password) {
       toast.error("All fields are required!");
       return;
@@ -38,9 +47,10 @@ export default function Login() {
         localStorage.setItem("token", token);
         toast.success(message || "Login successful!");
         navigate("/");
-        window.location.reload();
+        // window.location.reload();
       } else {
         toast.error("Token not received. Please try again.");
+        navigate("/login")
       }
     } catch (error) {
       console.error(error);
