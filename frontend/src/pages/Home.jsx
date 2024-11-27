@@ -34,7 +34,6 @@ const Home = () => {
   const totalPages = 3;
   const currentPage = 1;
 
-  // Function to handle movie click and save to localStorage
   const handleMovieClick = (movie) => {
     localStorage.setItem("selectedMovie", JSON.stringify(movie));
     navigate("/movie-details");
@@ -55,6 +54,9 @@ const Home = () => {
               price={e.trackPrice}
               photo={e.artworkUrl100}
               previewUrl={e.previewUrl}
+              longDescription={e.longDescription}
+              releaseDate={e.releaseDate}
+              director={e.artistName}
               onClick={() => handleMovieClick(e)}
             />
           );
