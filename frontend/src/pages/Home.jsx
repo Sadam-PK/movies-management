@@ -9,6 +9,15 @@ import axios from "axios";
 
 const Home = () => {
   const [myMovies, setMyMovies] = useState([]);
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  // Check if user is logged in and redirect if not
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,20 +34,11 @@ const Home = () => {
   const totalPages = 3;
   const currentPage = 1;
 
-  const navigate = useNavigate();
-
-  const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user, navigate]);
-
-  if (!user) {
-    navigate("/login");
-    return null;
-  }
+  // Function to handle movie click and save to localStorage
+  const handleMovieClick = (movie) => {
+    localStorage.setItem("selectedMovie", JSON.stringify(movie));
+    navigate("/movie-details");
+  };
 
   return (
     <div>
@@ -54,6 +54,8 @@ const Home = () => {
               genre={e.primaryGenreName}
               price={e.trackPrice}
               photo={e.artworkUrl100}
+              previewUrl={e.previewUrl}
+              onClick={() => handleMovieClick(e)}
             />
           );
         })}
