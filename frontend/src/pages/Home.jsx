@@ -34,6 +34,7 @@ const Home = () => {
   const totalPages = 3;
   const currentPage = 1;
 
+  // Function to handle movie click and save to localStorage
   const handleMovieClick = (movie) => {
     localStorage.setItem("selectedMovie", JSON.stringify(movie));
     navigate("/movie-details");
@@ -49,6 +50,7 @@ const Home = () => {
           return (
             <MovieCard
               key={i}
+              trackId={e.trackId}
               name={e.trackName}
               genre={e.primaryGenreName}
               price={e.trackPrice}

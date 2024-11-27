@@ -48,6 +48,16 @@ export const addFavorites = async (req, res) => {
         .json({ error: "trackId is required to add to favorites" });
     }
 
+    const existingFavorite = await Favorite.findOne({
+      userId,
+      movieId: trackId,
+    });
+    if (existingFavorite) {
+      return res
+        .status(400)
+        .json({ status: false, message: "Item is already in favorites" });
+    }
+
     const favorite = await new Favorite({
       userId: userId,
       movieId: trackId,

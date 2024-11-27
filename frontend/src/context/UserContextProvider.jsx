@@ -1,11 +1,30 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import UserContext from "./UserContext";
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/auth/me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, 
+          },
+        });
+        setUser(response.data.user);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, loading }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CustomButton from "../components/CustomButton";
 import ReactPlayer from "react-player";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -10,7 +12,9 @@ const MovieDetails = () => {
 
     if (storedMovie) {
       // Parse the movie data and set it to the state
-      setMovie(JSON.parse(storedMovie));
+      const parsedMovie = JSON.parse(storedMovie);
+      console.log("Stored Movie:", parsedMovie); // Log to check movie object
+      setMovie(parsedMovie);
     }
   }, []);
 
@@ -29,6 +33,59 @@ const MovieDetails = () => {
     return <div>Loading...</div>;
   }
 
+  // ### add to favorite ----
+  const handleFavorite = async (e, trackId) => {
+    e.preventDefault();
+
+    if (!trackId) {
+      console.log("No trackId provided"); // Debugging log
+      toast.error("Track ID is required to add to favorites");
+      return;
+    }
+
+    console.log("Track ID:", trackId); // Debugging trackId
+
+    try {
+      const token = localStorage.getItem("token");
+      console.log("Authorization Token:", token); // Ensure token is available
+
+      if (!token) {
+        console.log("No token found");
+        toast.error("You must be logged in to add to favorites");
+        return;
+      }
+
+      const response = await axios.post(
+        "http://localhost:3000/api/movies/favorites",
+        {
+          trackId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("Response:", response.data); // Log the response data for debugging
+
+      if (response.data.status) {
+        toast.success(response.data.message || "Added to favorites!");
+      } else {
+        toast.error(response.data.message || "Failed to add to favorites.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+      if (error.response && error.response.data) {
+        console.error("Error Response:", error.response.data);
+        toast.error(error.response.data.message || "Something went wrong.");
+      } else {
+        console.error("Unexpected error:", error);
+        toast.error("Something went wrong while adding to favorites!");
+      }
+    }
+  };
+
   return (
     <div className="background1 relative sm:h-[70vh] h-[40vh] flex flex-row bg-red-400">
       <div className="flex w-[50%]">
@@ -43,11 +100,15 @@ const MovieDetails = () => {
             <li>Director: {movie.director}</li>
             <li>Description: {movie.longDescription}</li>
           </ul>
-          {/* <CustomButton
-            name={"WATCH"}
+          {/* ### add to favorite ### */}
+          <CustomButton
+            name={"Add Favorite"}
+            onClick={(e) => {
+              console.log("Add Favorite clicked!"); // Debugging button click
+              handleFavorite(e, movie.trackId); // Ensure movie._id is passed
+            }}
             className="bg-indigo-900 p-3 rounded-3xl w-[20vh] hover:bg-indigo-500"
-          /> */}
-          {/* details */}
+          />
         </div>
       </div>
       <div className="flex justify-center items-center h-[80vh] bg-transparent z-10 pr-5 w-[50%]">
