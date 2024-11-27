@@ -8,15 +8,16 @@ const MovieCard = ({
   price,
   photo,
   previewUrl,
-  longDescription,
   releaseDate,
   director,
+  longDescription,
 }) => {
   const navigate = useNavigate();
 
   const handleMovieClick = (movie) => {
     localStorage.setItem("selectedMovie", JSON.stringify(movie));
-
+    console.log('===== movie ====', movie);
+    
     navigate("/movie-details");
   };
 
@@ -44,9 +45,9 @@ const MovieCard = ({
               price,
               photo,
               previewUrl,
-              longDescription,
               releaseDate,
               director,
+              longDescription,
             })
           }
         >

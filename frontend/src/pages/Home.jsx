@@ -56,9 +56,9 @@ const Home = () => {
               price={e.trackPrice}
               photo={e.artworkUrl100}
               previewUrl={e.previewUrl}
-              longDescription={e.longDescription}
               releaseDate={e.releaseDate}
               director={e.artistName}
+              longDescription={e.longDescription}
               onClick={() => handleMovieClick(e)}
             />
           );

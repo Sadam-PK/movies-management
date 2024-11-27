@@ -37,7 +37,10 @@ const MovieDetails = () => {
   const handleFavorite = async (
     e,
     trackId,
+    name,
     genre,
+    photo,
+    previewUrl,
     price,
     releaseDate,
     director,
@@ -45,20 +48,9 @@ const MovieDetails = () => {
   ) => {
     e.preventDefault();
 
-    if (!trackId) {
-      console.log("No trackId provided"); // Debugging log
-      toast.error("Track ID is required to add to favorites");
-      return;
-    }
-
-    console.log("Track ID:", trackId); // Debugging trackId
-
     try {
       const token = localStorage.getItem("token");
-      console.log("Authorization Token:", token); // Ensure token is available
-
       if (!token) {
-        console.log("No token found");
         toast.error("You must be logged in to add to favorites");
         return;
       }
@@ -67,8 +59,11 @@ const MovieDetails = () => {
         "http://localhost:3000/api/movies/favorites",
         {
           trackId,
+          name,
           genre,
           price,
+          photo,
+          previewUrl,
           releaseDate,
           director,
           longDescription,
@@ -80,22 +75,15 @@ const MovieDetails = () => {
         }
       );
 
-      console.log("Response:", response.data); // Log the response data for debugging
-
       if (response.data.status) {
         toast.success(response.data.message || "Added to favorites!");
       } else {
         toast.error(response.data.message || "Failed to add to favorites.");
       }
     } catch (error) {
-      console.error("Error occurred:", error);
-      if (error.response && error.response.data) {
-        console.error("Error Response:", error.response.data);
-        toast.error(error.response.data.message || "Something went wrong.");
-      } else {
-        console.error("Unexpected error:", error);
-        toast.error("Something went wrong while adding to favorites!");
-      }
+      const errorMessage =
+        error.response?.data?.message || "Something went wrong.";
+      toast.error(errorMessage);
     }
   };
 
@@ -121,7 +109,10 @@ const MovieDetails = () => {
               handleFavorite(
                 e,
                 movie.trackId,
+                movie.name,
                 movie.genre,
+                movie.photo,
+                movie.previewUrl,
                 movie.price,
                 movie.releaseDate,
                 movie.director,

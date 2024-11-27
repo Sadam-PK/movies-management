@@ -12,37 +12,38 @@ const Favorites = () => {
   const { user, loading } = useContext(UserContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!user) return; // If the user is not logged in, don't make the API request
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (!user) return; 
 
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          throw new Error("No token found in localStorage.");
-        }
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       if (!token) {
+  //         throw new Error("No token found in localStorage.");
+  //       }
 
-        const response = await axios.get(
-          "http://localhost:3000/api/movies/favorites",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+  //       const response = await axios.get(
+  //         "http://localhost:3000/api/movies/favorites",
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
 
-        setMyMovies(response?.data.favoriteMovies);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        if (error.response?.status === 401) {
-          // Token might be invalid, handle accordingly
-          navigate("/login");
-        }
-      }
-    };
+  //       setMyMovies(response?.data.favoriteMovies);
+  //       console.log("====== ", myMovies);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //       if (error.response?.status === 401) {
+  //         // Token might be invalid, handle accordingly
+  //         navigate("/login");
+  //       }
+  //     }
+  //   };
 
-    fetchData();
-  }, [user, loading, navigate]);
+  //   fetchData();
+  // }, [user, loading, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,6 +63,7 @@ const Favorites = () => {
           }
         );
         setMyMovies(response?.data.favoriteMovies);
+        console.log("====== ", myMovies);
       } catch (error) {
         console.error(error);
       }
@@ -70,7 +72,7 @@ const Favorites = () => {
     if (user) {
       fetchData();
     }
-  }, [user]);
+  }, [user, , loading, navigate]);
 
   if (!user) {
     return null;
@@ -79,19 +81,31 @@ const Favorites = () => {
   const totalPages = 3;
   const currentPage = 1;
 
+  // Function to handle movie click and save to localStorage
+  const handleMovieClick = (movie) => {
+    localStorage.setItem("selectedMovie", JSON.stringify(movie));
+    navigate("/movie-details");
+  };
+
   return (
     <div>
       <div className="bg-zinc-300">
         <h2 className=" pl-20 py-10 font-bold text-2xl">Favorite Movies</h2>
       </div>
       <div className="flex flex-wrap justify-center bg-zinc-300">
-        {myMovies.map((e) => (
+        {myMovies?.map((e, i) => (
           <MovieCard
-            key={e.id} // Use a unique key, like `e.id` or `e.name`
+            key={i}
+            trackId={e.movieId}
             name={e.name}
-            desc={e.desc}
-            rating={e.rating}
+            genre={e.genre}
+            price={e.price}
             photo={e.photo}
+            previewUrl={e.previewUrl}
+            releaseDate={e.releaseDate}
+            director={e.artistName}
+            longDescription={e.longDescription}
+            onClick={() => handleMovieClick(e)}
           />
         ))}
       </div>
