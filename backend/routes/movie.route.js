@@ -5,7 +5,6 @@ import {
   addFavorites,
   getFavorites,
   movies,
-  removeFavorite,
 } from "../controllers/movie.controller.js";
 
 // fetch movies from external API

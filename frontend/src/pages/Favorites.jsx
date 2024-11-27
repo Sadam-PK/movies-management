@@ -82,7 +82,7 @@ const Favorites = () => {
           <p>You do not have any favorite movies.</p>
         </div>
       )}
-      {myMovies.length > 0 && (
+      {/* {myMovies.length > 0 && (
         <div className="flex bg-zinc-300 justify-center items-center gap-5 pt-20">
           <button
             disabled={currentPage === 1}
@@ -100,7 +100,7 @@ const Favorites = () => {
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

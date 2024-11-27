@@ -10,6 +10,10 @@ import axios from "axios";
 
 const Home = () => {
   const [myMovies, setMyMovies] = useState([]);
+  const [totalMovies, setTotalMovies] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -20,25 +24,41 @@ const Home = () => {
     }
   }, [user, navigate]);
 
+  // Fetch movies with pagination
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/movies");
+        const response = await axios.get(
+          `http://localhost:3000/api/movies?page=${currentPage}&limit=${limit}&term=star`
+        );
         setMyMovies(response?.data.movies);
+        setTotalMovies(response?.data.totalMovies);
+        setTotalPages(response?.data.totalPages);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, []);
-
-  const totalPages = 3;
-  const currentPage = 1;
+  }, [currentPage, limit]);
 
   // Function to handle movie click and save to localStorage
   const handleMovieClick = (movie) => {
     localStorage.setItem("selectedMovie", JSON.stringify(movie));
     navigate("/movie-details");
+  };
+
+  // Handle next page click
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Handle previous page click
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   return (
@@ -72,7 +92,7 @@ const Home = () => {
       {myMovies?.length > 0 && (
         <div className="flex bg-zinc-300 justify-center items-center gap-5 pt-20">
           <button
-            // onClick={handlePrevPage}
+            onClick={handlePrevPage}
             disabled={currentPage === 1}
             className="border border-gray-500 px-3 rounded-xl cursor-pointer hover:border-gray-400"
           >
@@ -82,7 +102,7 @@ const Home = () => {
             Page {currentPage} of {totalPages}
           </span>
           <button
-            // onClick={handleNextPage}
+            onClick={handleNextPage}
             disabled={currentPage === totalPages}
             className="border border-gray-500 px-3 rounded-xl cursor-pointer hover:border-gray-400"
           >
