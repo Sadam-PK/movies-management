@@ -33,7 +33,8 @@ export const movies = async (req, res) => {
 
 export const addFavorites = async (req, res) => {
   const userId = req.user._id;
-  const { trackId } = req.body;
+  const { trackId, genre, price, releaseDate, director, longDescription } =
+    req.body;
 
   try {
     if (!userId) {
@@ -61,6 +62,11 @@ export const addFavorites = async (req, res) => {
     const favorite = await new Favorite({
       userId: userId,
       movieId: trackId,
+      genre: genre,
+      price: price,
+      releaseDate: releaseDate,
+      director: director,
+      longDescription: longDescription,
     });
 
     favorite.save();

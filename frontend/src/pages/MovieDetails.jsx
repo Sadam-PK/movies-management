@@ -34,7 +34,15 @@ const MovieDetails = () => {
   }
 
   // ### add to favorite ----
-  const handleFavorite = async (e, trackId) => {
+  const handleFavorite = async (
+    e,
+    trackId,
+    genre,
+    price,
+    releaseDate,
+    director,
+    longDescription
+  ) => {
     e.preventDefault();
 
     if (!trackId) {
@@ -59,6 +67,11 @@ const MovieDetails = () => {
         "http://localhost:3000/api/movies/favorites",
         {
           trackId,
+          genre,
+          price,
+          releaseDate,
+          director,
+          longDescription,
         },
         {
           headers: {
@@ -105,7 +118,15 @@ const MovieDetails = () => {
             name={"Add Favorite"}
             onClick={(e) => {
               console.log("Add Favorite clicked!"); // Debugging button click
-              handleFavorite(e, movie.trackId); // Ensure movie._id is passed
+              handleFavorite(
+                e,
+                movie.trackId,
+                movie.genre,
+                movie.price,
+                movie.releaseDate,
+                movie.director,
+                movie.longDescription
+              ); // Ensure movie._id is passed
             }}
             className="bg-indigo-900 p-3 rounded-3xl w-[20vh] hover:bg-indigo-500"
           />

@@ -8,6 +8,11 @@ const favoriteSchema = new mongoose.Schema(
       required: true,
     },
     movieId: { type: String, required: true },
+    genre: { type: String, required: true },
+    price: { type: Number, required: true },
+    releaseDate: { type: String, required: true },
+    director: { type: String, required: true },
+    longDescription: { type: String, required: true },
   },
   { timestamps: true }
 );
