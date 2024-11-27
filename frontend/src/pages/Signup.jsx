@@ -1,19 +1,27 @@
 import CustomInput from "../components/CustomInput";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../components/CustomButton";
 import axios from "axios";
+import UserContext from "../context/UserContext";
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user, loading } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      return navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleNameChange = (event) => setName(event.target.value);
   const handleEmailChange = (event) => setEmail(event.target.value);

@@ -4,6 +4,7 @@ import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
 
@@ -75,7 +76,7 @@ const MovieDetails = () => {
         }
       );
 
-      if (response.data.status) {
+      if (response.data.status==true) {
         toast.success(response.data.message || "Added to favorites!");
       } else {
         toast.error(response.data.message || "Failed to add to favorites.");
@@ -105,7 +106,7 @@ const MovieDetails = () => {
           <CustomButton
             name={"Add Favorite"}
             onClick={(e) => {
-              console.log("Add Favorite clicked!"); // Debugging button click
+              
               handleFavorite(
                 e,
                 movie.trackId,
@@ -117,7 +118,7 @@ const MovieDetails = () => {
                 movie.releaseDate,
                 movie.director,
                 movie.longDescription
-              ); // Ensure movie._id is passed
+              ); 
             }}
             className="bg-indigo-900 p-3 rounded-3xl w-[20vh] hover:bg-indigo-500"
           />

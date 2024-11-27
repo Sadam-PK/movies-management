@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Footer from "../components/Footer";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,44 +11,11 @@ const Favorites = () => {
   const { user, loading } = useContext(UserContext);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     if (!user) return; 
-
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       if (!token) {
-  //         throw new Error("No token found in localStorage.");
-  //       }
-
-  //       const response = await axios.get(
-  //         "http://localhost:3000/api/movies/favorites",
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-
-  //       setMyMovies(response?.data.favoriteMovies);
-  //       console.log("====== ", myMovies);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //       if (error.response?.status === 401) {
-  //         // Token might be invalid, handle accordingly
-  //         navigate("/login");
-  //       }
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [user, loading, navigate]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log("Token:", token); // Check if the token is retrieved correctly
+        console.log("Token:", token);
         if (!token) {
           throw new Error("No token found in localStorage.");
         }
@@ -71,12 +37,14 @@ const Favorites = () => {
 
     if (user) {
       fetchData();
+    } else {
+      navigate("/login");
     }
-  }, [user, , loading, navigate]);
+  }, [user, loading, navigate]);
 
-  if (!user) {
-    return null;
-  }
+  // if (!user) {
+  //   return navigate("/login");
+  // }
 
   const totalPages = 3;
   const currentPage = 1;
@@ -109,6 +77,11 @@ const Favorites = () => {
           />
         ))}
       </div>
+      {myMovies.length == 0 && (
+        <div className="flex w-full h-[80vh] justify-center items-center ">
+          <p>You do not have any favorite movies.</p>
+        </div>
+      )}
       {myMovies.length > 0 && (
         <div className="flex bg-zinc-300 justify-center items-center gap-5 pt-20">
           <button
@@ -128,7 +101,6 @@ const Favorites = () => {
           </button>
         </div>
       )}
-      <Footer />
     </div>
   );
 };

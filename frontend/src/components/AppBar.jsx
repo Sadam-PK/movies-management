@@ -4,12 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTv } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import UserContext from "../context/UserContext";
+import Logout from "./Logout";
 
 const Appbar = () => {
-  // const user = "sadam@gmail.com";
-  // const user = false;
-
-  // const [user, setUser] = useState(null);
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -35,7 +32,7 @@ const Appbar = () => {
       <div className="bg-white p-3 flex justify-between items-center relative">
         <div className="space-x-2 ml-20">
           <FontAwesomeIcon icon={faTv} className="text-2xl" />
-          <Link to="/" className="font-bold">
+          <Link to="/" className="font-bold text-2xl">
             Movie Management
           </Link>
         </div>
@@ -58,7 +55,7 @@ const Appbar = () => {
       <div className="p-3 flex justify-between items-center">
         <div className="space-x-2 ml-20">
           <FontAwesomeIcon icon={faTv} className="text-2xl" />
-          <Link to="/" className="font-bold">
+          <Link to="/" className="font-bold text-2xl">
             Movie Management
           </Link>
         </div>
@@ -70,7 +67,7 @@ const Appbar = () => {
               className="cursor-pointer w-[6vw] text-center bg-indigo-900 text-white 
             rounded-full hover:bg-indigo-700 hover:transition duration-500"
             >
-              Logout
+              <Logout />
             </li>
           </ul>
         </div>

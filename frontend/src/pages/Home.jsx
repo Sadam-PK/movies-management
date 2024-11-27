@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -42,8 +43,11 @@ const Home = () => {
 
   return (
     <div>
-      <div className="bg-zinc-300">
-        <h2 className=" pl-20 py-10 font-bold text-2xl">Popular Movies</h2>
+      <div className="bg-zinc-300 flex flex-row justify-between">
+        <h2 className=" pl-32 py-10 font-bold text-2xl">Popular Movies</h2>
+        <h2 className=" pr-40 pt-10 font-bold text-2xl hover:text-indigo-900">
+          <Link to="/favorites">Favorite Movies</Link>
+        </h2>
       </div>
       <div className="flex flex-wrap justify-center bg-zinc-300">
         {myMovies?.map((e, i) => {
@@ -86,7 +90,6 @@ const Home = () => {
           </button>
         </div>
       )}
-      <Footer />
     </div>
   );
 };
