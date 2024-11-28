@@ -8,6 +8,8 @@ import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../components/CustomButton";
 import axios from "axios";
 import UserContext from "../context/UserContext";
+import apiBaseUrl from '../config.js'
+
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -36,7 +38,7 @@ export default function Signup() {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/auth/signup`,
+        `${apiBaseUrl}/api/auth/signup`,
         {
           name,
           email,

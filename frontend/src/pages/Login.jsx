@@ -8,6 +8,8 @@ import CustomButton from "../components/CustomButton";
 import axios from "axios";
 import UserContext from "../context/UserContext";
 import { toast } from "react-toastify";
+import apiBaseUrl from '../config.js'
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -31,7 +33,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/auth/login`,
+        `${apiBaseUrl}/api/auth/login`,
         { email, password }
       );
 
@@ -43,7 +45,7 @@ export default function Login() {
 
         // Fetch user data after successful login
         const userResponse = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/auth/me`,
+          `${apiBaseUrl}/api/auth/me`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

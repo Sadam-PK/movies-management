@@ -1,16 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faRectangleXmark, faTv } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faRectangleXmark,
+  faTv,
+} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import UserContext from "../context/UserContext";
 import Logout from "./Logout";
 import Menu from "./Menu";
+import apiBaseUrl from "../config.js";
 
 const Appbar = () => {
   const { user, setUser } = useContext(UserContext);
-  
-  // ##### menu open - close state #### 
+
+  // ##### menu open - close state ####
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMenu = () => {
@@ -20,11 +25,14 @@ const Appbar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/auth/me`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await axios.get(
+          `${apiBaseUrl}/api/auth/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         setUser(response.data.user);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -61,7 +69,6 @@ const Appbar = () => {
             </li>
           </ul>
           {isOpen && <Menu />}
-
         </div>
       </div>
     );
@@ -82,7 +89,7 @@ const Appbar = () => {
             <li
               className="cursor-pointer sm:w-[6vw] text-center bg-indigo-900 text-white 
             sm:rounded-full rounded-lg px-2 hover:bg-indigo-700 hover:transition duration-500 "
-            > 
+            >
               <Logout />
             </li>
           </ul>

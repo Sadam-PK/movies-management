@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import apiBaseUrl from '../config.js'
+
 
 const Favorites = () => {
   const [myMovies, setMyMovies] = useState([]);
@@ -21,7 +23,7 @@ const Favorites = () => {
         }
 
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/movies/favorites`,
+          `${apiBaseUrl}/api/movies/favorites`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

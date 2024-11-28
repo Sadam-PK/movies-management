@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UserContext from "./UserContext";
+import apiBaseUrl from '../config.js'
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -9,7 +10,7 @@ const UserContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/auth/me`, {
+        const response = await axios.get(`${apiBaseUrl}/api/auth/me`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`, 
           },

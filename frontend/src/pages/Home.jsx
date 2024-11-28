@@ -7,6 +7,8 @@ import Footer from "../components/Footer";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import apiBaseUrl from '../config.js'
+
 
 const Home = () => {
   const [myMovies, setMyMovies] = useState([]);
@@ -29,7 +31,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/movies?page=${currentPage}&limit=${limit}&term=star`
+          `${apiBaseUrl}/api/movies?page=${currentPage}&limit=${limit}&term=star`
         );
         setMyMovies(response?.data.movies);
         setTotalMovies(response?.data.totalMovies);

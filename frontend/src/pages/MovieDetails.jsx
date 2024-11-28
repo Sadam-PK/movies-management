@@ -3,6 +3,8 @@ import CustomButton from "../components/CustomButton";
 import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
 import axios from "axios";
+import apiBaseUrl from '../config.js'
+
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -55,7 +57,7 @@ const MovieDetails = () => {
       }
 
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/movies/favorites`,
+        `${apiBaseUrl}/api/movies/favorites`,
         {
           trackId,
           name,
