@@ -1,13 +1,13 @@
 import CustomInput from "../components/CustomInput";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../components/CustomButton";
 import axios from "axios";
 import UserContext from "../context/UserContext";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -24,10 +24,6 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setUser({
-      email,
-      password,
-    });
     if (!email || !password) {
       toast.error("All fields are required!");
       return;
@@ -35,22 +31,28 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "http://192.168.100.35:3000/api/auth/login",
-        {
-          email,
-          password,
-        }
+        "http://localhost:3000/api/auth/login",
+        { email, password }
       );
+
       const { token, message } = response.data;
 
       if (token) {
-        localStorage.setItem("token", token);
+        localStorage.setItem("token", token); // Save token
         toast.success(message || "Login successful!");
+
+        // Fetch user data after successful login
+        const userResponse = await axios.get(
+          "http://localhost:3000/api/auth/me",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        setUser(userResponse.data.user); // Set the authenticated user
         navigate("/");
-        // window.location.reload();
       } else {
         toast.error("Token not received. Please try again.");
-        navigate("/login");
       }
     } catch (error) {
       console.error(error);
@@ -68,7 +70,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && localStorage.getItem("token")) {
       navigate("/");
     }
   }, [user, navigate]);

@@ -9,6 +9,8 @@ import Menu from "./Menu";
 
 const Appbar = () => {
   const { user, setUser } = useContext(UserContext);
+  
+  // ##### menu open - close state #### 
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMenu = () => {
