@@ -4,7 +4,6 @@ import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
 
@@ -76,7 +75,7 @@ const MovieDetails = () => {
         }
       );
 
-      if (response.data.status==true) {
+      if (response.data.status == true) {
         toast.success(response.data.message || "Added to favorites!");
       } else {
         toast.error(response.data.message || "Failed to add to favorites.");
@@ -89,13 +88,13 @@ const MovieDetails = () => {
   };
 
   return (
-    <div className="background1 relative sm:h-[70vh] h-[40vh] flex flex-row bg-red-400">
-      <div className="flex w-[50%]">
+    <div className="background1 relative sm:h-[70vh] h-full flex sm:flex-row flex-col">
+      <div className="flex sm:w-[50%] w-full sm:pt-28">
         <div className="absolute inset-0 opacity-80 bg-gray-600" />
-        <div className="text-white relative pl-32 px-3 pt-32 space-y-6">
+        <div className="text-white relative sm:pl-32 px-3 sm:pt-40 pt-20 sm:space-y-6">
           {/* title */}
-          <h2 className="font-bold text-4xl sm:text-5xl">{movie.name}</h2>
-          <ul className="flex flex-col gap-5 py-5 pr-40">
+          <h2 className="sm:font-bold sm:text-4xl">{movie.name}</h2>
+          <ul className="flex flex-col gap-5 py-5 pr-40 text-base">
             <li>Genre: {movie.genre}</li>
             <li>Price: {movie.price}</li>
             <li>Release Date: {formatReleaseDate(movie.releaseDate)}</li>
@@ -106,7 +105,6 @@ const MovieDetails = () => {
           <CustomButton
             name={"Add Favorite"}
             onClick={(e) => {
-              
               handleFavorite(
                 e,
                 movie.trackId,
@@ -118,14 +116,14 @@ const MovieDetails = () => {
                 movie.releaseDate,
                 movie.director,
                 movie.longDescription
-              ); 
+              );
             }}
             className="bg-indigo-900 p-3 rounded-3xl w-[20vh] hover:bg-indigo-500"
           />
         </div>
       </div>
-      <div className="flex justify-center items-center h-[80vh] bg-transparent z-10 pr-5 w-[50%]">
-        <div className="w-full max-w-4xl aspect-w-16 aspect-h-9 flex flex-col border-4 border-gray-300">
+      <div className="flex justify-center items-center h-[100%] bg-transparent z-10 px-5 sm:w-[50%] ">
+        <div className="w-full aspect-w-16 aspect-h-9 flex flex-col border-4 border-gray-300">
           {movie.previewUrl ? (
             <ReactPlayer
               url={movie.previewUrl}
@@ -134,7 +132,7 @@ const MovieDetails = () => {
               height="100%"
             />
           ) : (
-            <div className="w-full h-[40vh] flex bg-black rounded-md">
+            <div className="w-full sm:h-[40vh] h-[20vh] flex bg-black rounded-md">
               <div className="text-center w-full h-full flex justify-center items-center">
                 <p className="text-white">
                   No preview available for this movie.

@@ -63,12 +63,15 @@ const Home = () => {
 
   return (
     <div>
-      <div className="bg-zinc-300 flex flex-row justify-between">
-        <h2 className=" pl-32 py-10 font-bold text-2xl">Popular Movies</h2>
-        <h2 className=" pr-40 pt-10 font-bold text-2xl hover:text-indigo-900">
+      {/* ##### popular & favorite section ###### */}
+      <div className="bg-zinc-300 flex sm:flex-row sm:justify-between w-full px-6">
+        <h2 className=" sm:pl-32 py-10 font-bold sm:text-2xl w-full text-indigo-900">Popular Movies</h2>
+        <h2 className=" sm:pr-40 pt-10 font-bold sm:text-2xl w-full text-right hover:text-indigo-900">
           <Link to="/favorites">Favorite Movies</Link>
         </h2>
       </div>
+
+      {/* ########## cards section ######## */}
       <div className="flex flex-wrap justify-center bg-zinc-300">
         {myMovies?.map((e, i) => {
           return (
@@ -88,7 +91,8 @@ const Home = () => {
           );
         })}
       </div>
-      {/* Pagination controls */}
+
+      {/* ##### Pagination section ###### */}
       {myMovies?.length > 0 && (
         <div className="flex bg-zinc-300 justify-center items-center gap-5 pt-20">
           <button
