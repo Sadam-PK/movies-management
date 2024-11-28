@@ -40,38 +40,45 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
+
   try {
+    // Find the user by email
     const user = await User.findOne({ email });
     if (!user) {
+      // If no user is found, return an error response
       return res
         .status(400)
-        .json({ status: false, message: "Invalid credentials" });
+        .json({ status: false, message: "Invalid email or password" });
     }
+
+    // Compare the provided password with the hashed password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
+      // If password does not match, return an error response
       return res
         .status(400)
-        .json({ status: false, message: "Incorrect password" });
+        .json({ status: false, message: "Invalid email or password" });
     }
-    if (user && isPasswordValid) {
-      // ####### token ##### jwt #####
-      const token = jwt.sign(
-        { _id: user._id, name: user.name, email: user.email },
-        SECRET,
-        {
-          expiresIn: "1hr",
-        }
-      );
-      res
-        .status(200)
-        .json({ status: true, message: "Logged in successfully", token });
-    } else {
-      res.status(400).json({ message: "Invalid username or password" });
-    }
+
+    // Generate a JWT token if credentials are valid
+    const token = jwt.sign(
+      { _id: user._id, name: user.name, email: user.email },
+      SECRET,
+      {
+        expiresIn: "1hr",
+      }
+    );
+
+    // Return success response with token
+    return res
+      .status(200)
+      .json({ status: true, message: "Logged in successfully", token });
   } catch (error) {
-    return res.status(400).json({ status: false, message: error.message });
+    // Handle server errors
+    return res.status(500).json({ status: false, message: error.message });
   }
 };
+
 
 export const me = async (req, res) => {
   try {
