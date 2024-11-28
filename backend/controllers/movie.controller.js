@@ -14,7 +14,7 @@ export const movies = async (req, res) => {
     const term = req.query.term || "star";
 
     const response = await axios.get(
-      `https://itunes.apple.com/search?term=${term}&country=au&media=movie`
+      `${process.env.ITUNES_BASE_URL}/search?term=${term}&country=au&media=movie`
     );
 
     const movies = response.data.results;

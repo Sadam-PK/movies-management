@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.ORIGIN_1, // frontend domain
+    origin: process.env.CORS_ORIGIN, // frontend domain
     credentials: true, // for cookies
   })
 );
