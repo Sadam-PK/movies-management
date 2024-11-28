@@ -20,7 +20,7 @@ const Appbar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/auth/me", {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/auth/me`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

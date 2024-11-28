@@ -21,7 +21,7 @@ const Favorites = () => {
         }
 
         const response = await axios.get(
-          "http://localhost:3000/api/movies/favorites",
+          `${import.meta.env.VITE_BASE_URL}/api/movies/favorites`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

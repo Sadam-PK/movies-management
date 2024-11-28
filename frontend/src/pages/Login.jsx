@@ -31,7 +31,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        `${import.meta.env.VITE_BASE_URL}/api/auth/login`,
         { email, password }
       );
 
@@ -43,7 +43,7 @@ export default function Login() {
 
         // Fetch user data after successful login
         const userResponse = await axios.get(
-          "http://localhost:3000/api/auth/me",
+          `${import.meta.env.VITE_BASE_URL}/api/auth/me`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

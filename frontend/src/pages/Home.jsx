@@ -29,7 +29,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/movies?page=${currentPage}&limit=${limit}&term=star`
+          `${import.meta.env.VITE_BASE_URL}/api/movies?page=${currentPage}&limit=${limit}&term=star`
         );
         setMyMovies(response?.data.movies);
         setTotalMovies(response?.data.totalMovies);
@@ -65,7 +65,9 @@ const Home = () => {
     <div>
       {/* ##### popular & favorite section ###### */}
       <div className="bg-zinc-300 flex sm:flex-row sm:justify-between w-full px-6">
-        <h2 className=" sm:pl-32 py-10 font-bold sm:text-2xl w-full text-indigo-900">Popular Movies</h2>
+        <h2 className=" sm:pl-32 py-10 font-bold sm:text-2xl w-full text-indigo-900">
+          Popular Movies
+        </h2>
         <h2 className=" sm:pr-40 pt-10 font-bold sm:text-2xl w-full text-right hover:text-indigo-900">
           <Link to="/favorites">Favorite Movies</Link>
         </h2>

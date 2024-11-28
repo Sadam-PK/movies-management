@@ -12,7 +12,7 @@ const MovieDetails = () => {
 
     if (storedMovie) {
       const parsedMovie = JSON.parse(storedMovie);
-      console.log("Stored Movie:", parsedMovie); 
+      console.log("Stored Movie:", parsedMovie);
       setMovie(parsedMovie);
     }
   }, []);
@@ -55,7 +55,7 @@ const MovieDetails = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:3000/api/movies/favorites",
+        `${import.meta.env.VITE_BASE_URL}/api/movies/favorites`,
         {
           trackId,
           name,
