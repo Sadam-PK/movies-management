@@ -112,7 +112,7 @@ export default function Login() {
         />
 
         <div className="p-5">
-          <p className="text-gray-500">
+          <p className="text-gray-500 text-sm sm:text-base">
             Dont have an account?{" "}
             <Link
               to="/signup"
