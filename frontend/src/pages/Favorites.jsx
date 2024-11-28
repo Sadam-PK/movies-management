@@ -42,10 +42,6 @@ const Favorites = () => {
     }
   }, [user, loading, navigate]);
 
-  // if (!user) {
-  //   return navigate("/login");
-  // }
-
   const totalPages = 3;
   const currentPage = 1;
 

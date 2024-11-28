@@ -11,9 +11,8 @@ const MovieDetails = () => {
     const storedMovie = localStorage.getItem("selectedMovie");
 
     if (storedMovie) {
-      // Parse the movie data and set it to the state
       const parsedMovie = JSON.parse(storedMovie);
-      console.log("Stored Movie:", parsedMovie); // Log to check movie object
+      console.log("Stored Movie:", parsedMovie); 
       setMovie(parsedMovie);
     }
   }, []);

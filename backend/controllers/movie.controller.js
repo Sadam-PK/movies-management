@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const SECRET = process.env.SECRET;
 
+// ######  movies endpoint controller  #########
 export const movies = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -31,6 +32,7 @@ export const movies = async (req, res) => {
   }
 };
 
+// ######  Add favorite Controller  #########
 export const addFavorites = async (req, res) => {
   const userId = req.user._id;
   const {
@@ -73,7 +75,7 @@ export const addFavorites = async (req, res) => {
       movieId: trackId,
       name: name,
       photo: photo,
-      previewUrl:previewUrl,
+      previewUrl: previewUrl,
       price: price,
       genre: genre,
       releaseDate: releaseDate,
@@ -89,6 +91,7 @@ export const addFavorites = async (req, res) => {
   }
 };
 
+// ########  Get Favorite controller  #########
 export const getFavorites = async (req, res) => {
   try {
     const userId = req.user._id;

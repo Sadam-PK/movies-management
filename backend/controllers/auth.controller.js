@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const SECRET = process.env.SECRET;
 
+// ####### Singup Controller ########
 export const signup = async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -38,29 +39,25 @@ export const signup = async (req, res) => {
   }
 };
 
+//#########   Login Controller    ###########
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find the user by email
     const user = await User.findOne({ email });
     if (!user) {
-      // If no user is found, return an error response
       return res
         .status(400)
         .json({ status: false, message: "Invalid email or password" });
     }
 
-    // Compare the provided password with the hashed password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      // If password does not match, return an error response
       return res
         .status(400)
         .json({ status: false, message: "Invalid email or password" });
     }
 
-    // Generate a JWT token if credentials are valid
     const token = jwt.sign(
       { _id: user._id, name: user.name, email: user.email },
       SECRET,
@@ -69,17 +66,15 @@ export const login = async (req, res) => {
       }
     );
 
-    // Return success response with token
     return res
       .status(200)
       .json({ status: true, message: "Logged in successfully", token });
   } catch (error) {
-    // Handle server errors
     return res.status(500).json({ status: false, message: error.message });
   }
 };
 
-
+//#########   Me - User controller    ###########
 export const me = async (req, res) => {
   try {
     const { email } = req.user;
@@ -92,8 +87,6 @@ export const me = async (req, res) => {
     if (!user) {
       return res.status(404).json({ status: false, message: "User not found" });
     }
-
-    //  user.password = undefined; // password not needed and shouldnt be sent
 
     return res.status(200).json({
       status: true,

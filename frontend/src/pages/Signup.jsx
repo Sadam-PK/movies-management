@@ -47,7 +47,6 @@ export default function Signup() {
       navigate("/login");
     } catch (error) {
       console.error(error);
-      // Handle specific error response
       if (
         error.response &&
         error.response.data &&
