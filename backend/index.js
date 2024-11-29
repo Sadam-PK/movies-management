@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 // CORS configuration
-const prodOrigins = [process.env.ORIGIN_1, process.env.ORIGIN_2];
-const devOrigin = ["http://localhost:5173"]; // your frontend dev URL
+const devOrigin = ["http://localhost:5173"];
+const prodOrigins = [process.env.ORIGIN_2];
 
 const allowedOrigins =
   process.env.NODE_ENV === "production" ? prodOrigins : devOrigin;
@@ -20,17 +20,14 @@ const allowedOrigins =
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Log the incoming origin for debugging
-      console.log("Incoming Origin:", origin);
-      // If the origin is either from the allowed list or if no origin is sent (e.g., Postman)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true, // Allow cookies
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 
