@@ -20,6 +20,7 @@ const allowedOrigins =
 app.use(
   cors({
     origin: (origin, callback) => {
+      // Accept any origin that is allowed in production or development
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -27,13 +28,13 @@ app.use(
       }
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"], // Ensure Authorization header is allowed
-    credentials: true, // Allow credentials (cookies, authorization headers)
+    allowedHeaders: ["Content-Type", "Authorization"], // Ensure the 'Authorization' header is allowed
+    credentials: true, // Allow credentials like cookies and authorization headers
   })
 );
 
-// Preflight request handling (for all routes)
-app.options("*", cors()); // This ensures OPTIONS preflight requests are properly handled
+// Handle preflight (OPTIONS) requests for all routes
+app.options("*", cors()); // Make sure all OPTIONS requests get the proper headers
 
 app.use(express.json());
 app.use(cookiesParser());
