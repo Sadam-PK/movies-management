@@ -50,9 +50,11 @@ export default function Login() {
   
         // Step 3: Fetch user data using the token
         const userResponse = await axios.get(
+          
           `${apiBaseUrl}/api/auth/me`, // Your backend URL to get user info
           {
             headers: {
+              "Content-Type": "application/json",
               Authorization: `Bearer ${token}`, // Send token in Authorization header
             },
           }
