@@ -25,14 +25,11 @@ const AppBar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(
-          `${apiBaseUrl}/api/auth/me`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await axios.get(`${apiBaseUrl}/api/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         setUser(response.data.user);
       } catch (error) {
         console.error("Error fetching user data:", error);
