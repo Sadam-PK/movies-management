@@ -26,50 +26,56 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check if email and password are provided
     if (!email || !password) {
       toast.error("All fields are required!");
       return;
     }
-
+  
     try {
+      // Step 1: Send login request with email and password
       const response = await axios.post(
-        `${apiBaseUrl}/api/auth/login`,
-        { email, password }
+        `${apiBaseUrl}/api/auth/login`, // Your backend URL
+        { email, password }, // User credentials
       );
-
+  
+      // Step 2: Get the token from the response
       const { token, message } = response.data;
-
+  
+      // If token received, proceed with storing it and fetching user info
       if (token) {
-        localStorage.setItem("token", token); // Save token
-        toast.success(message || "Login successful!");
-
-        // Fetch user data after successful login
+        localStorage.setItem("token", token); // Save token in localStorage
+        toast.success(message || "Login successful!"); // Show success toast
+  
+        // Step 3: Fetch user data using the token
         const userResponse = await axios.get(
-          `${apiBaseUrl}/api/auth/me`,
+          `${apiBaseUrl}/api/auth/me`, // Your backend URL to get user info
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: {
+              Authorization: `Bearer ${token}`, // Send token in Authorization header
+            },
           }
         );
-
-        setUser(userResponse.data.user); // Set the authenticated user
-        navigate("/");
+  
+        // Step 4: Set the user data in context or state
+        setUser(userResponse.data.user); // Save user data in state/context
+        navigate("/"); // Navigate to home page after successful login
       } else {
         toast.error("Token not received. Please try again.");
       }
     } catch (error) {
-      console.error(error);
-
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
+      console.error(error); // Log error to console
+  
+      // Show specific error message if available, else general error
+      if (error.response && error.response.data && error.response.data.message) {
         toast.error(error.response.data.message);
       } else {
         toast.error("Something went wrong!");
       }
     }
   };
+  
 
   useEffect(() => {
     if (user && localStorage.getItem("token")) {

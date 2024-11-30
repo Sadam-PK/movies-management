@@ -27,12 +27,13 @@ app.use(
       }
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow Authorization header
+    credentials: true, // This is important if you ever decide to use cookies
   })
 );
 
 app.use(express.json());
-app.use(cookiesParser());
+app.use(cookiesParser()); // Not needed if you're not using cookies
 
 // Use routes
 app.use("/api/auth", authRoutes);
