@@ -8,8 +8,7 @@ import CustomButton from "../components/CustomButton";
 import axios from "axios";
 import UserContext from "../context/UserContext";
 import { toast } from "react-toastify";
-import apiBaseUrl from '../config.js'
-
+import apiBaseUrl from "../config.js";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -26,58 +25,50 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Check if email and password are provided
+
     if (!email || !password) {
       toast.error("All fields are required!");
       return;
     }
-  
+
     try {
-      // Step 1: Send login request with email and password
-      const response = await axios.post(
-        `${apiBaseUrl}/api/auth/login`, // Your backend URL
-        { email, password }, // User credentials
-      );
-  
-      // Step 2: Get the token from the response
+      const response = await axios.post(`${apiBaseUrl}/api/auth/login`, {
+        email,
+        password,
+      });
+
       const { token, message } = response.data;
-  
-      // If token received, proceed with storing it and fetching user info
+
       if (token) {
-        localStorage.setItem("token", token); // Save token in localStorage
-        toast.success(message || "Login successful!"); // Show success toast
-  
-        // Step 3: Fetch user data using the token
-        const userResponse = await axios.get(
-          
-          `${apiBaseUrl}/api/auth/me`, // Your backend URL to get user info
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`, // Send token in Authorization header
-            },
-          }
-        );
-  
-        // Step 4: Set the user data in context or state
-        setUser(userResponse.data.user); // Save user data in state/context
-        navigate("/"); // Navigate to home page after successful login
+        localStorage.setItem("token", token);
+        toast.success(message || "Login successful!");
+
+        const userResponse = await axios.get(`${apiBaseUrl}/api/auth/me`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUser(userResponse.data.user);
+        navigate("/");
       } else {
         toast.error("Token not received. Please try again.");
       }
     } catch (error) {
-      console.error(error); // Log error to console
-  
-      // Show specific error message if available, else general error
-      if (error.response && error.response.data && error.response.data.message) {
+      console.error(error);
+
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
         toast.error(error.response.data.message);
       } else {
         toast.error("Something went wrong!");
       }
     }
   };
-  
 
   useEffect(() => {
     if (user && localStorage.getItem("token")) {
