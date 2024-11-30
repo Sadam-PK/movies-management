@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Footer from "../components/Footer";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -19,7 +18,6 @@ const Home = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
-  // Check if user is logged in and redirect if not
   useEffect(() => {
     if (!user) {
       navigate("/login");

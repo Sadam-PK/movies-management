@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MovieDetails from "./pages/MovieDetails";
 import "./App.css";
-import Appbar from "./components/Appbar";
+import Appbar from "./components/AppBar";
 import Footer from "./components/Footer";
 
 function App() {

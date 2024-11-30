@@ -12,7 +12,7 @@ import Logout from "./Logout";
 import Menu from "./Menu";
 import apiBaseUrl from "../config.js";
 
-const Appbar = () => {
+const AppBar = () => {
   const { user, setUser } = useContext(UserContext);
 
   // ##### menu open - close state ####
@@ -41,7 +41,7 @@ const Appbar = () => {
     fetchUserData();
   }, []);
 
-  // conditional render """"" appbar """"" whether or not the user is present
+  // conditional render """"" AppBar """"" whether or not the user is present
   if (!user) {
     return (
       <div className="bg-white p-3 flex justify-between items-center relative">
@@ -99,4 +99,4 @@ const Appbar = () => {
   );
 };
 
-export default Appbar;
+export default AppBar;
