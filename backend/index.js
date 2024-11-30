@@ -25,12 +25,13 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],  // Ensure OPTIONS is allowed
+    allowedHeaders: ["Content-Type", "Authorization", "Accept"],  // Add Accept in case you need it
+    credentials: true,  // Allow cookies/credentials
   })
 );
 
+app.options("*", cors());
 app.use(express.json());
 app.use(cookiesParser());
 
