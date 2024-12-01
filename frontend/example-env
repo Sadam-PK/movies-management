@@ -1,0 +1,8 @@
+VITE_ENV=development
+VITE_BASE_URL=http://localhost:3000
+VITE_PROD_BASE_URL=https://movies-management-9rw2.vercel.app
+VITE_LOGIN='/api/auth/login'
+VITE_REGISTER='/api/auth/signup'
+VITE_ME='/api/auth/me'
+VITE_MOVIES='/api/movies'
+VITE_FAVORITES='/api/movies/favorites'
