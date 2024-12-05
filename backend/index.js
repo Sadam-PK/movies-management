@@ -10,28 +10,8 @@ import { databaseConnection } from "./db/dbConnection.js";
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-const devOrigin = ["http://localhost:5173"];
-const prodOrigins = [process.env.ORIGIN_2];
+app.use(cors());
 
-const allowedOrigins =
-  process.env.NODE_ENV === "production" ? prodOrigins : devOrigin;
-
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],  
-    allowedHeaders: ["Content-Type", "Authorization", "Accept"],  
-    credentials: true, 
-  })
-);
-
-app.options("*", cors());
 app.use(express.json());
 app.use(cookiesParser());
 

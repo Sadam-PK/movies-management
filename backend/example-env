@@ -1,3 +1,7 @@
 PORT=3000
+NODE_ENV=development
 DATABASE_STRING=mongodb+srv://worksadamkhan:sadam123@cluster0.39ssa.mongodb.net
 SECRET=s3cret
+BASE_URL=http://localhost:3000
+FRONTEND_URL=http://localhost:5173
+ITUNES_BASE_URL=https://itunes.apple.com
