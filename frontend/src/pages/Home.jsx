@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import apiBaseUrl from '../config.js'
+import configUrl from '../config.js'
 
 
 const Home = () => {
@@ -29,7 +29,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${apiBaseUrl}/api/movies?page=${currentPage}&limit=${limit}&term=star`
+          `${configUrl}/api/movies?page=${currentPage}&limit=${limit}&term=star`
         );
         setMyMovies(response?.data.movies);
         setTotalMovies(response?.data.totalMovies);
