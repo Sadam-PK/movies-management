@@ -10,7 +10,9 @@ import axios from "axios";
 import UserContext from "../context/UserContext";
 import Logout from "./Logout";
 import Menu from "./Menu";
-import apiBaseUrl from "../config.js";
+// import apiBaseUrl from "../config.js";
+const apiBaseUrl=import.meta.env.VITE_LOCAL_URL;
+
 
 const AppBar = () => {
   const { user, setUser } = useContext(UserContext);

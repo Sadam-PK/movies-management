@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UserContext from "./UserContext";
-import apiBaseUrl from '../config.js'
+// import apiBaseUrl from '../config.js'
+const apiBaseUrl=import.meta.env.VITE_LOCAL_URL;
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);

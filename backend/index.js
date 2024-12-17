@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: './backend/.env' });
 import cors from "cors";
 import cookiesParser from "cookie-parser";
 import authRoutes from "./routes/auth.route.js";

@@ -3,7 +3,9 @@ import CustomButton from "../components/CustomButton";
 import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
 import axios from "axios";
-import apiBaseUrl from '../config.js'
+// import apiBaseUrl from '../config.js'
+const apiBaseUrl=import.meta.env.VITE_LOCAL_URL;
+
 
 
 const MovieDetails = () => {

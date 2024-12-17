@@ -8,7 +8,9 @@ import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../components/CustomButton";
 import axios from "axios";
 import UserContext from "../context/UserContext";
-import apiBaseUrl from '../config.js'
+// import apiBaseUrl from '../config.js'
+const apiBaseUrl=import.meta.env.VITE_LOCAL_URL;
+
 
 
 export default function Signup() {

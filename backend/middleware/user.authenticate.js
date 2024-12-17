@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: './backend/.env' });
 const SECRET = process.env.SECRET;
 
 export const authenticateJwt = (req, res, next) => {
