@@ -24,7 +24,7 @@ const MovieCard = ({
       className="flex flex-col justify-center items-center bg-white text-gray-500
     w-full sm:w-[20vw] h-auto rounded-xl p-2 mt-5 mx-1 sm:mx-4 sm:my-4 object-cover"
     >
-      <div className="flex flex-col bg-red-400 h-[36vh] w-full">
+      <div className="flex flex-col h-[36vh] w-full">
         <img src={photo} className="w-full h-full object-cover" />
       </div>
       <div className="flex flex-col sm:gap-3 gap-4 bg-white h-[14vh] w-[90%] pt-5 sm:text-base font-thin text-sm">

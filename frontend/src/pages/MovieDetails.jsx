@@ -4,9 +4,8 @@ import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
 import axios from "axios";
 // import apiBaseUrl from '../config.js'
-const apiBaseUrl=import.meta.env.MODE==="development" ? 'http://localhost:3000':"";
-
-
+const apiBaseUrl =
+  import.meta.env.MODE === "development" ? "http://localhost:3000" : "";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -91,13 +90,16 @@ const MovieDetails = () => {
   };
 
   return (
-    <div className="background1 relative sm:h-[70vh] h-full flex sm:flex-row flex-col sm:text-base ">
-      <div className="flex sm:w-[50%] w-full sm:pt-28">
+    <div className="background1 relative sm:h-[70vh] flex sm:flex-row flex-col sm:text-base h-auto">
+      <div className="flex sm:w-[50%] w-full sm:pt-28 h-auto py-10">
         <div className="absolute inset-0 opacity-80 bg-gray-600" />
-        <div className="text-white relative sm:pl-32 px-3 sm:pt-40 py-10 sm:space-y-6">
+        <div
+          className="flex flex-col text-white relative h-full sm:pl-32 px-3 sm:pt-40 
+        sm:py-10 sm:space-y-6 sm:text-base"
+        >
           {/* title */}
           <h2 className="sm:font-bold sm:text-4xl">{movie.name}</h2>
-          <ul className="flex flex-col gap-5 py-5 pr-5 sm:pr-40 text-base">
+          <ul className="flex flex-col gap-5 py-5 pr-5 sm:pr-40 sm:text-base">
             <li>Genre: {movie.genre}</li>
             <li>Price: {movie.price}</li>
             <li>Release Date: {formatReleaseDate(movie.releaseDate)}</li>
@@ -125,7 +127,8 @@ const MovieDetails = () => {
           />
         </div>
       </div>
-      <div className="flex justify-center items-center h-[100%] bg-transparent z-10 px-5 sm:w-[50%] ">
+
+      <div className="flex justify-center items-center bg-transparent z-10 px-5 sm:w-[50%] h-auto">
         <div className="w-full aspect-w-16 aspect-h-9 flex flex-col border-4 border-gray-300">
           {movie.previewUrl ? (
             <ReactPlayer
