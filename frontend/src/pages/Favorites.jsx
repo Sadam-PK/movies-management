@@ -57,10 +57,10 @@ const Favorites = () => {
 
   return (
     <div>
-      <div className="bg-zinc-300">
-        <h2 className=" pl-20 py-10 font-bold text-2xl">Favorite Movies</h2>
+      <div className="bg-zinc-100">
+        <h2 className=" sm:pl-24 pl-10 py-10 text-indigo-900 font-bold text-2xl">Favorite Movies</h2>
       </div>
-      <div className="flex flex-wrap justify-center bg-zinc-300">
+      <div className="flex flex-wrap sm:px-0 px-5 justify-center bg-zinc-100">
         {myMovies?.map((e, i) => (
           <MovieCard
             key={i}
@@ -83,7 +83,7 @@ const Favorites = () => {
         </div>
       )}
       {/* {myMovies.length > 0 && (
-        <div className="flex bg-zinc-300 justify-center items-center gap-5 pt-20">
+        <div className="flex bg-zinc-100 justify-center items-center gap-5 pt-20">
           <button
             disabled={currentPage === 1}
             className="border border-gray-500 px-3 rounded-xl cursor-pointer hover:border-gray-400"

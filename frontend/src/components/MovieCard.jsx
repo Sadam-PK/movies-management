@@ -16,15 +16,13 @@ const MovieCard = ({
 
   const handleMovieClick = (movie) => {
     localStorage.setItem("selectedMovie", JSON.stringify(movie));
-    console.log("===== movie ====", movie);
-
     navigate("/movie-details");
   };
 
   return (
     <div
       className="flex flex-col justify-center items-center bg-white text-gray-500
-    sm:w-[20vw] w-[44vw] h-auto rounded-xl  p-2 mt-5 mx-1 sm:mx-4 sm:my-4 object-cover"
+    w-full sm:w-[20vw] h-auto rounded-xl p-2 mt-5 mx-1 sm:mx-4 sm:my-4 object-cover"
     >
       <div className="flex flex-col bg-red-400 h-[36vh] w-full">
         <img src={photo} className="w-full h-full object-cover" />

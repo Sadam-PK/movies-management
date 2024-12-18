@@ -65,7 +65,7 @@ const Home = () => {
   return (
     <div>
       {/* ##### popular & favorite section ###### */}
-      <div className="bg-zinc-300 flex sm:flex-row sm:justify-between w-full px-6">
+      <div className="bg-zinc-100 flex sm:flex-row sm:justify-between w-full px-6">
         <h2 className=" sm:pl-32 py-10 font-bold sm:text-2xl w-full text-indigo-900">
           Popular Movies
         </h2>
@@ -75,7 +75,7 @@ const Home = () => {
       </div>
 
       {/* ########## cards section ######## */}
-      <div className="flex flex-wrap justify-center bg-zinc-300">
+      <div className="flex flex-wrap justify-center bg-zinc-100 sm:px-0 px-5">
         {myMovies?.map((e, i) => {
           return (
             <MovieCard
@@ -97,7 +97,7 @@ const Home = () => {
 
       {/* ##### Pagination section ###### */}
       {myMovies?.length > 0 && (
-        <div className="flex bg-zinc-300 justify-center items-center gap-5 pt-20">
+        <div className="flex bg-zinc-100 justify-center items-center gap-5 pt-20">
           <button
             onClick={handlePrevPage}
             disabled={currentPage === 1}

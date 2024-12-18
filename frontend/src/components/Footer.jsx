@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div>
       {/* ----- Footer ----- */}
-      <div className="h-[32vh] sm:flex-col bg-zinc-300 flex flex-col items-center justify-center">
+      <div className="h-[32vh] sm:flex-col bg-zinc-100 flex flex-col items-center justify-center">
         <ul className="flex sm:flex-row flex-wrap sm:gap-10 gap-3 px-3 justify-center">
           <li className="hover:text-indigo-900 cursor-pointer">Android App</li>
           <li className="hover:text-indigo-900 cursor-pointer">
