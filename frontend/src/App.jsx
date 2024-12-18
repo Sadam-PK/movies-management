@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 
@@ -20,8 +26,10 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/movie-details" element={<MovieDetails />} />
+        {/* catch all routes */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }
