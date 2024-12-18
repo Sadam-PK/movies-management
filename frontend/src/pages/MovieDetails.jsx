@@ -90,12 +90,12 @@ const MovieDetails = () => {
   };
 
   return (
-    <div className="background1 relative sm:h-[70vh] flex sm:flex-row flex-col sm:text-base h-auto">
-      <div className="flex sm:w-[50%] w-full sm:pt-28 h-auto py-10">
+    <div className="background1 relative sm:h-screen flex sm:flex-row flex-col justify-center items-center sm:text-base h-auto">
+      <div className="flex sm:w-[50%] w-full sm:pt-28 h-auto">
         <div className="absolute inset-0 opacity-80 bg-gray-600" />
         <div
-          className="flex flex-col text-white relative h-full sm:pl-32 px-3 sm:pt-40 
-        sm:py-10 sm:space-y-6 sm:text-base"
+          className="flex flex-col text-white relative h-full sm:pl-32 px-3 py-10
+         sm:text-base"
         >
           {/* title */}
           <h2 className="sm:font-bold sm:text-4xl">{movie.name}</h2>
@@ -128,7 +128,7 @@ const MovieDetails = () => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center bg-transparent z-10 px-5 sm:w-[50%] h-auto">
+      <div className="flex justify-center items-center bg-transparent z-10 px-5 sm:w-[50%] h-full">
         <div className="w-full aspect-w-16 aspect-h-9 flex flex-col border-4 border-gray-300">
           {movie.previewUrl ? (
             <ReactPlayer
