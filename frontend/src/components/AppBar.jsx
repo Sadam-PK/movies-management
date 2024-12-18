@@ -11,8 +11,8 @@ import UserContext from "../context/UserContext";
 import Logout from "./Logout";
 import Menu from "./Menu";
 // import apiBaseUrl from "../config.js";
-const apiBaseUrl=import.meta.env.MODE==="development" ? 'http://localhost:3000':"";
-
+const apiBaseUrl =
+  import.meta.env.MODE === "development" ? "http://localhost:3000" : "";
 
 const AppBar = () => {
   const { user, setUser } = useContext(UserContext);
@@ -76,18 +76,18 @@ const AppBar = () => {
     <div>
       <div className="p-3 flex justify-between sm:items-center">
         <div className="space-x-2 sm:ml-20">
-          <FontAwesomeIcon icon={faTv} className="text-2xl" />
-          <Link to="/" className="font-bold text-2xl">
-            Movie Management
+          {/* <FontAwesomeIcon icon={faTv} className="text-2xl" /> */}
+          <Link to="/" className="font-bold text-xl sm:text-2xl">
+            MOVIES MANAGEMENT
           </Link>
         </div>
 
-        <div>
-          <ul className="flex sm:flex-row  gap-5">
+        <div className="flex sm:flex-row justify-center items-center">
+          <ul className="flex sm:flex-row gap-5">
             <li className="sm:block hidden">{user.email}</li>
             <li
               className="cursor-pointer sm:w-[6vw] text-center bg-indigo-900 text-white 
-            sm:rounded-full rounded-lg px-2 hover:bg-indigo-700 hover:transition duration-500 "
+            sm:rounded-full rounded-lg px-2 hover:bg-indigo-700 hover:transition duration-500 text-sm sm:text-base"
             >
               <Logout />
             </li>

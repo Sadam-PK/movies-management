@@ -91,13 +91,13 @@ const MovieDetails = () => {
   };
 
   return (
-    <div className="background1 relative sm:h-[70vh] h-full flex sm:flex-row flex-col">
+    <div className="background1 relative sm:h-[70vh] h-full flex sm:flex-row flex-col sm:text-base ">
       <div className="flex sm:w-[50%] w-full sm:pt-28">
         <div className="absolute inset-0 opacity-80 bg-gray-600" />
-        <div className="text-white relative sm:pl-32 px-3 sm:pt-40 pt-20 sm:space-y-6">
+        <div className="text-white relative sm:pl-32 px-3 sm:pt-40 py-10 sm:space-y-6">
           {/* title */}
           <h2 className="sm:font-bold sm:text-4xl">{movie.name}</h2>
-          <ul className="flex flex-col gap-5 py-5 pr-40 text-base">
+          <ul className="flex flex-col gap-5 py-5 pr-5 sm:pr-40 text-base">
             <li>Genre: {movie.genre}</li>
             <li>Price: {movie.price}</li>
             <li>Release Date: {formatReleaseDate(movie.releaseDate)}</li>
