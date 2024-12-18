@@ -19,7 +19,7 @@ const Footer = () => {
           <p>
             Movie Management offers free online movie streaming, allowing you to
             enjoy thousands of movies and TV shows without the need for
-            registration or payment. You can stream instantly from MoviesCloud
+            registration or payment. You stream instantly from MoviesCloud
             to watch at your convenience.
           </p>
         </span>
