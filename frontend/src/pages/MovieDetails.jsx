@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 import { toast } from "react-toastify";
 import axios from "axios";
 // import apiBaseUrl from '../config.js'
-const apiBaseUrl=import.meta.env.VITE_LOCAL_URL;
+const apiBaseUrl=import.meta.env.MODE==="development" ? 'http://localhost:3000':"";
 
 
 

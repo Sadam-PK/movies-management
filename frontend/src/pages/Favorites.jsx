@@ -6,7 +6,7 @@ import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // import apiBaseUrl from '../config.js'
-const apiBaseUrl=import.meta.env.VITE_LOCAL_URL;
+const apiBaseUrl=import.meta.env.MODE==="development" ? 'http://localhost:3000':"";
 
 
 
