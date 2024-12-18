@@ -9,7 +9,7 @@ import axios from "axios";
 import UserContext from "../context/UserContext";
 import { toast } from "react-toastify";
 // import apiBaseUrl from "../config.js";
-const apiBaseUrl=import.meta.env.VITE_LOCAL_URL;
+const apiBaseUrl=import.meta.env.MODE==="development" ? 'http://localhost:3000':"";
 
 
 export default function Login() {
