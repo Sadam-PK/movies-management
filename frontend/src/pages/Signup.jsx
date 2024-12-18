@@ -113,7 +113,7 @@ export default function Signup() {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-blue-700 hover:text-blue-500 
+              className="text-indigo-900 hover:text-indigo-700 
           transition duration-300"
             >
               Login here

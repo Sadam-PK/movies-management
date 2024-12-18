@@ -45,7 +45,7 @@ const AppBar = () => {
     return (
       <div className="bg-white p-3 flex justify-between items-center relative">
         <div className="space-x-2 sm:ml-20">
-          <FontAwesomeIcon icon={faTv} className="text-2xl" />
+          {/* <FontAwesomeIcon icon={faTv} className="text-2xl" /> */}
           <Link to="/" className="font-bold text-2xl">
             Movie Management
           </Link>
